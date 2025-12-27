@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Work Reminder — Chat & Alarm (Final)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🔔 Work Reminder — Chat & Alarm (Final)</h1>
+    <div class="actions">
+      <button id="enableSoundBtn">Enable Sound</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <!-- left column -->
+    <div class="left">
+      <div class="card">
+        <div class="quote" id="quote">Click "New Quote" to see a motivational line.</div>
+        <div style="margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <button id="newQuoteBtn">✨ New Quote</button>
+          <select id="toneSelect" title="Alarm tone">
+            <option value="classic">Classic alarm</option>
+            <option value="beep">Beep</option>
+            <option value="chime">Soft chime</option>
+          </select>
+          <button id="previewToneBtn">Preview Tone</button>
+          <div style="margin-left:auto;display:flex;gap:6px;align-items:center">
+            <input id="taskName" placeholder="Task name" style="min-width:160px;padding:8px;border-radius:8px;border:1px solid #ddd" />
+            <select id="categoryInput" style="padding:8px;border-radius:8px;border:1px solid #ddd">
+              <option value="Work">Work</option>
+              <option value="Study">Study</option>
+              <option value="Personal">Personal</option>
+              <option value="Note">Note</option>
+            </select>
+            <input id="dateInput" type="date" style="padding:8px;border-radius:8px;border:1px solid #ddd" />
+            <input id="timeInput" type="time" style="padding:8px;border-radius:8px;border:1px solid #ddd" />
+            <button id="addBtn">➕ Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div><div style="font-weight:600">Progress</div><div class="muted">Completed vs total</div></div>
+          <div style="width:260px"><div class="progress"><i id="progressBar" style="width:0%">0%</i></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div><div style="font-weight:600">Tasks</div><div class="muted">Sorted by date/time</div></div>
+          <div style="display:flex;gap:6px;align-items:center">
+            <select id="filterCategory" style="padding:6px;border-radius:6px">
+              <option value="All">All</option>
+              <option value="Work">Work</option>
+              <option value="Study">Study</option>
+              <option value="Personal">Personal</option>
+              <option value="Note">Note</option>
+            </select>
+            <select id="sortSel" style="padding:6px;border-radius:6px">
+              <option value="date">Sort: Date</option>
+              <option value="name">Sort: Name</option>
+            </select>
+            <button id="clearAll" class="small-btn">Clear All</button>
+          </div>
+        </div>
+
+        <div id="taskList" class="task-list" style="margin-top:10px"></div>
+      </div>
+
+      <div class="card">
+        <div style="font-weight:600;margin-bottom:8px">Calendar (grouped)</div>
+        <div id="calendarView" class="muted"></div>
+      </div>
+    </div>
+
+    <!-- right column -->
+    <div class="right">
+      <div class="card">
+        <div style="font-weight:600">Chat — create reminders by typing</div>
+        <div id="chatBox" class="chat-box"></div>
+        <div class="chat-input" style="margin-top:8px">
+          <input id="chatInput" placeholder="Try: remind me to call mom in 10 minutes" />
+          <button id="sendChat">Send</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="font-weight:600">Settings / Info</div>
+        <div class="muted" style="margin-top:6px">
+          Alarms loop until you press <b>Stop</b>. If overdue reminders exist when you open the page, they'll ring immediately.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ring overlay -->
+  <div id="ringOverlay" class="overlay" style="display:none">
+    <div class="ring-modal">
+      <h3>⏰ Reminder</h3>
+      <div id="ringList" style="margin:10px 0;text-align:left"></div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:10px">
+        <button id="snooze5" class="small-btn">Snooze 5m</button>
+        <button id="snooze10" class="small-btn">Snooze 10m</button>
+        <button id="stopBtn" class="danger">⏹ Stop</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- audio elements -->
+  <audio id="audio_classic" preload="auto"><source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg"></audio>
+  <audio id="audio_beep" preload="auto"><source src="https://www.soundjay.com/button/sounds/beep-07.mp3" type="audio/mpeg"></audio>
+  <audio id="audio_chime" preload="auto"><source src="https://www.soundjay.com/misc/sounds/bell-ringing-01.mp3" type="audio/mpeg"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
